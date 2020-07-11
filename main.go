@@ -1,7 +1,7 @@
 package main
 
 import (
-	"app/message"
+	"app/grpcserver"
 	"bufio"
 	"fmt"
 	"net/http"
@@ -17,12 +17,22 @@ const (
 )
 
 type Feed struct {
-	name    string `json:"name"`
-	age     int8   `json:"age"`
-	address string `json:"address"`
+	Name    string `json:"name"`
+	Age     int8   `json:"age"`
+	Address string `json:"address"`
 }
 
 func main() {
+
+	grpcserver.Start()
+	//user:=database.UserInfo{
+	//	ID:       1,
+	//	Name:     "twjitm",
+	//	Birthday: "2020",
+	//}
+	//database.SaveUser(user)
+	//
+	//message.GetUserList()
 	//input()
 	//message.CreateThread()
 	// message.MapTest()
@@ -51,7 +61,25 @@ func main() {
 	//
 	//searchTeam("twj")
 	//request()
-	message.Init()
+
+	//var array = [3]int{12, 212, 12}
+	//var tcp = message.TcpHandler{
+	//	Cmd:   12,
+	//	Ctime: 12,
+	//	MType: 12,
+	//	Head:  array,
+	//	Body:  nil,
+	//}
+	//
+	//message.Builder(tcp)
+	//var udp = message.UdpHandler{
+	//	Cmd:  c0,
+	//	Head: array,
+	//	Body: nil,
+	//}
+	//message.Builder(&udp)
+	//
+	//message.GetBody(&udp)
 
 }
 

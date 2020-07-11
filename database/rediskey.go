@@ -1,1 +1,3 @@
-package main
+package database
+
+const UNFRIENDLIEST string = "h:user:info"
