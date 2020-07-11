@@ -1,0 +1,9 @@
+syntax = "proto3";
+option go_package = "../proto/mcmd";
+package mcmd;
+
+
+enum messageCmd {
+    GET_USER_LIST = 0;
+}
+
