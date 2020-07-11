@@ -1,11 +1,13 @@
 syntax = "proto3";
-option go_package = "../proto/message";
+//option go_package = "~/go/src/go_game_server/proto/message";
 package message;
+import "mcmd.proto";
 
 // The Customer service definition.
 service RpcGameServer {
     // Get all Customers with filter - A server-to-client streaming RPC.
-    rpc GatUserInfo (GetUserInfoRequest) returns (stream UserInfo) {}
+    rpc GatUserInfo (GetUserInfoRequest) returns (stream UserInfo) {
+    }
 }
 
 // Request message for creating a new customer
@@ -27,6 +29,8 @@ message Address {
 
 message GetUserInfoRequest {
     repeated string name = 1;
+    BaseInfo base = 2;
+    MessageCmd cmd = 3;
 }
 
 message GetUserInfoResponse {

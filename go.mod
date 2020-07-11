@@ -14,6 +14,7 @@ require (
 	github.com/mattn/go-isatty v0.0.7 // indirect
 	github.com/onsi/ginkgo v1.14.0 // indirect
 	github.com/stretchr/testify v1.5.1 // indirect
+	github.com/twjitm/twjitm-core v0.0.0-20181117075500-85f60459c360 // indirect
 	github.com/ugorji/go v1.1.4 // indirect
 	google.golang.org/appengine v1.6.6 // indirect
 	google.golang.org/grpc v1.30.0

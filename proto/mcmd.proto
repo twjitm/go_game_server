@@ -1,9 +1,13 @@
 syntax = "proto3";
-option go_package = "../proto/mcmd";
-package mcmd;
+//option go_package = "~/go/src/go_game_server/proto/mcmd";
+package message;
 
 
-enum messageCmd {
+enum MessageCmd {
     GET_USER_LIST = 0;
+}
+
+message BaseInfo {
+
 }
 

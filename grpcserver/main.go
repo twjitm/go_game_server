@@ -1,7 +1,7 @@
 package grpcserver
 
 import (
-	"app/proto/message"
+	message "app/proto"
 	"fmt"
 	"google.golang.org/grpc"
 	"log"

@@ -1,7 +1,7 @@
 package grpcclient
 
 import (
-	"app/proto/message"
+	message "app/proto"
 	"context"
 	"fmt"
 	_ "github.com/gogo/protobuf/gogoproto"
