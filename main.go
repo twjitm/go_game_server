@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"sync"
+	"time"
 )
 
 const PI = float64(3.1415926)
@@ -24,7 +26,12 @@ type Feed struct {
 
 func main() {
 
-	grpcserver.Start()
+	wg := sync.WaitGroup{}
+	wg.Add(2)
+	go grpcserver.Start()
+	time.Sleep(1000)
+	//go grpcclient.Client()
+	wg.Wait()
 	//user:=database.UserInfo{
 	//	ID:       1,
 	//	Name:     "twjitm",

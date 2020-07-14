@@ -1,0 +1,14 @@
+syntax = "proto3";
+package message;
+import "mcmd.proto";
+import "message.proto";
+import "entity.proto";
+
+service Rpc {
+    rpc GatUserInfo (GetUserInfoRequest) returns (stream GetUserInfoReply) {
+
+    }
+    rpc SendMessage (ChatInfo) returns (ChatInfo) {
+    }
+
+}

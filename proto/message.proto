@@ -2,37 +2,14 @@ syntax = "proto3";
 //option go_package = "~/go/src/go_game_server/proto/message";
 package message;
 import "mcmd.proto";
+import "entity.proto";
 
-// The Customer service definition.
-service RpcGameServer {
-    // Get all Customers with filter - A server-to-client streaming RPC.
-    rpc GatUserInfo (GetUserInfoRequest) returns (stream UserInfo) {
-    }
-}
-
-// Request message for creating a new customer
-message UserInfo {
-    int32 id = 1; // Unique ID number for a Customer.
-    string name = 2;
-    string email = 3;
-    string phone = 4;
-    repeated Address addresses = 5;
-}
-
-message Address {
-    string street = 1;
-    string city = 2;
-    string state = 3;
-    string zip = 4;
-    bool isShippingAddress = 5;
-}
 
 message GetUserInfoRequest {
     repeated string name = 1;
     BaseInfo base = 2;
     MessageCmd cmd = 3;
 }
-
-message GetUserInfoResponse {
-    repeated UserInfo list = 1;
+message GetUserInfoReply {
+    repeated UserInfo userList = 1;
 }
