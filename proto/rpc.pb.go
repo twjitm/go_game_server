@@ -34,16 +34,17 @@ var file_rpc_proto_rawDesc = []byte{
 	0x0a, 0x09, 0x72, 0x70, 0x63, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x07, 0x6d, 0x65, 0x73,
 	0x73, 0x61, 0x67, 0x65, 0x1a, 0x0a, 0x6d, 0x63, 0x6d, 0x64, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
 	0x1a, 0x0d, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a,
-	0x0c, 0x65, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x32, 0x87, 0x01,
-	0x0a, 0x03, 0x52, 0x70, 0x63, 0x12, 0x49, 0x0a, 0x0b, 0x47, 0x61, 0x74, 0x55, 0x73, 0x65, 0x72,
+	0x0c, 0x65, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x32, 0x89, 0x01,
+	0x0a, 0x03, 0x52, 0x70, 0x63, 0x12, 0x47, 0x0a, 0x0b, 0x47, 0x61, 0x74, 0x55, 0x73, 0x65, 0x72,
 	0x49, 0x6e, 0x66, 0x6f, 0x12, 0x1b, 0x2e, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x2e, 0x47,
 	0x65, 0x74, 0x55, 0x73, 0x65, 0x72, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
 	0x74, 0x1a, 0x19, 0x2e, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x2e, 0x47, 0x65, 0x74, 0x55,
-	0x73, 0x65, 0x72, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x00, 0x30, 0x01,
-	0x12, 0x35, 0x0a, 0x0b, 0x53, 0x65, 0x6e, 0x64, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12,
-	0x11, 0x2e, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x2e, 0x43, 0x68, 0x61, 0x74, 0x49, 0x6e,
-	0x66, 0x6f, 0x1a, 0x11, 0x2e, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x2e, 0x43, 0x68, 0x61,
-	0x74, 0x49, 0x6e, 0x66, 0x6f, 0x22, 0x00, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x73, 0x65, 0x72, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x00, 0x12, 0x39,
+	0x0a, 0x0b, 0x53, 0x65, 0x6e, 0x64, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x11, 0x2e,
+	0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x2e, 0x43, 0x68, 0x61, 0x74, 0x49, 0x6e, 0x66, 0x6f,
+	0x1a, 0x11, 0x2e, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x2e, 0x43, 0x68, 0x61, 0x74, 0x49,
+	0x6e, 0x66, 0x6f, 0x22, 0x00, 0x28, 0x01, 0x30, 0x01, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x33,
 }
 
 var file_rpc_proto_goTypes = []interface{}{
@@ -102,8 +103,8 @@ const _ = grpc.SupportPackageIsVersion6
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type RpcClient interface {
-	GatUserInfo(ctx context.Context, in *GetUserInfoRequest, opts ...grpc.CallOption) (Rpc_GatUserInfoClient, error)
-	SendMessage(ctx context.Context, in *ChatInfo, opts ...grpc.CallOption) (*ChatInfo, error)
+	GatUserInfo(ctx context.Context, in *GetUserInfoRequest, opts ...grpc.CallOption) (*GetUserInfoReply, error)
+	SendMessage(ctx context.Context, opts ...grpc.CallOption) (Rpc_SendMessageClient, error)
 }
 
 type rpcClient struct {
@@ -114,105 +115,109 @@ func NewRpcClient(cc grpc.ClientConnInterface) RpcClient {
 	return &rpcClient{cc}
 }
 
-func (c *rpcClient) GatUserInfo(ctx context.Context, in *GetUserInfoRequest, opts ...grpc.CallOption) (Rpc_GatUserInfoClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_Rpc_serviceDesc.Streams[0], "/message.Rpc/GatUserInfo", opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &rpcGatUserInfoClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type Rpc_GatUserInfoClient interface {
-	Recv() (*GetUserInfoReply, error)
-	grpc.ClientStream
-}
-
-type rpcGatUserInfoClient struct {
-	grpc.ClientStream
-}
-
-func (x *rpcGatUserInfoClient) Recv() (*GetUserInfoReply, error) {
-	m := new(GetUserInfoReply)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (c *rpcClient) SendMessage(ctx context.Context, in *ChatInfo, opts ...grpc.CallOption) (*ChatInfo, error) {
-	out := new(ChatInfo)
-	err := c.cc.Invoke(ctx, "/message.Rpc/SendMessage", in, out, opts...)
+func (c *rpcClient) GatUserInfo(ctx context.Context, in *GetUserInfoRequest, opts ...grpc.CallOption) (*GetUserInfoReply, error) {
+	out := new(GetUserInfoReply)
+	err := c.cc.Invoke(ctx, "/message.Rpc/GatUserInfo", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
+func (c *rpcClient) SendMessage(ctx context.Context, opts ...grpc.CallOption) (Rpc_SendMessageClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_Rpc_serviceDesc.Streams[0], "/message.Rpc/SendMessage", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &rpcSendMessageClient{stream}
+	return x, nil
+}
+
+type Rpc_SendMessageClient interface {
+	Send(*ChatInfo) error
+	Recv() (*ChatInfo, error)
+	grpc.ClientStream
+}
+
+type rpcSendMessageClient struct {
+	grpc.ClientStream
+}
+
+func (x *rpcSendMessageClient) Send(m *ChatInfo) error {
+	return x.ClientStream.SendMsg(m)
+}
+
+func (x *rpcSendMessageClient) Recv() (*ChatInfo, error) {
+	m := new(ChatInfo)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // RpcServer is the server API for Rpc service.
 type RpcServer interface {
-	GatUserInfo(*GetUserInfoRequest, Rpc_GatUserInfoServer) error
-	SendMessage(context.Context, *ChatInfo) (*ChatInfo, error)
+	GatUserInfo(context.Context, *GetUserInfoRequest) (*GetUserInfoReply, error)
+	SendMessage(Rpc_SendMessageServer) error
 }
 
 // UnimplementedRpcServer can be embedded to have forward compatible implementations.
 type UnimplementedRpcServer struct {
 }
 
-func (*UnimplementedRpcServer) GatUserInfo(*GetUserInfoRequest, Rpc_GatUserInfoServer) error {
-	return status.Errorf(codes.Unimplemented, "method GatUserInfo not implemented")
+func (*UnimplementedRpcServer) GatUserInfo(context.Context, *GetUserInfoRequest) (*GetUserInfoReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GatUserInfo not implemented")
 }
-func (*UnimplementedRpcServer) SendMessage(context.Context, *ChatInfo) (*ChatInfo, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SendMessage not implemented")
+func (*UnimplementedRpcServer) SendMessage(Rpc_SendMessageServer) error {
+	return status.Errorf(codes.Unimplemented, "method SendMessage not implemented")
 }
 
 func RegisterRpcServer(s *grpc.Server, srv RpcServer) {
 	s.RegisterService(&_Rpc_serviceDesc, srv)
 }
 
-func _Rpc_GatUserInfo_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(GetUserInfoRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(RpcServer).GatUserInfo(m, &rpcGatUserInfoServer{stream})
-}
-
-type Rpc_GatUserInfoServer interface {
-	Send(*GetUserInfoReply) error
-	grpc.ServerStream
-}
-
-type rpcGatUserInfoServer struct {
-	grpc.ServerStream
-}
-
-func (x *rpcGatUserInfoServer) Send(m *GetUserInfoReply) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func _Rpc_SendMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ChatInfo)
+func _Rpc_GatUserInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserInfoRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(RpcServer).SendMessage(ctx, in)
+		return srv.(RpcServer).GatUserInfo(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/message.Rpc/SendMessage",
+		FullMethod: "/message.Rpc/GatUserInfo",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RpcServer).SendMessage(ctx, req.(*ChatInfo))
+		return srv.(RpcServer).GatUserInfo(ctx, req.(*GetUserInfoRequest))
 	}
 	return interceptor(ctx, in, info, handler)
+}
+
+func _Rpc_SendMessage_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(RpcServer).SendMessage(&rpcSendMessageServer{stream})
+}
+
+type Rpc_SendMessageServer interface {
+	Send(*ChatInfo) error
+	Recv() (*ChatInfo, error)
+	grpc.ServerStream
+}
+
+type rpcSendMessageServer struct {
+	grpc.ServerStream
+}
+
+func (x *rpcSendMessageServer) Send(m *ChatInfo) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func (x *rpcSendMessageServer) Recv() (*ChatInfo, error) {
+	m := new(ChatInfo)
+	if err := x.ServerStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
 }
 
 var _Rpc_serviceDesc = grpc.ServiceDesc{
@@ -220,15 +225,16 @@ var _Rpc_serviceDesc = grpc.ServiceDesc{
 	HandlerType: (*RpcServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "SendMessage",
-			Handler:    _Rpc_SendMessage_Handler,
+			MethodName: "GatUserInfo",
+			Handler:    _Rpc_GatUserInfo_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
 		{
-			StreamName:    "GatUserInfo",
-			Handler:       _Rpc_GatUserInfo_Handler,
+			StreamName:    "SendMessage",
+			Handler:       _Rpc_SendMessage_Handler,
 			ServerStreams: true,
+			ClientStreams: true,
 		},
 	},
 	Metadata: "rpc.proto",

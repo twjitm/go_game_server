@@ -1,4 +1,5 @@
 package server
+
 import (
 	message "app/proto"
 	"context"
@@ -12,17 +13,14 @@ type Server struct {
 	Rpc *message.RpcServer
 }
 
-func (s *Server) GatUserInfo(request *message.GetUserInfoRequest, server message.Rpc_GatUserInfoServer) error {
+func (s *Server) GatUserInfo(c context.Context, request *message.GetUserInfoRequest) (*message.GetUserInfoReply, error) {
 	names := request.Name
 	fmt.Print(names)
-	_ = server.Send(&message.GetUserInfoReply{
-		UserList: nil,
-	})
-	return nil
+	return nil, nil
 }
 
-func (s *Server) SendMessage(c context.Context, in *message.ChatInfo) (*message.ChatInfo, error) {
-	return nil, nil
+func (s *Server) SendMessage(server message.Rpc_SendMessageServer) error {
+	return nil
 }
 
 func Start() {
