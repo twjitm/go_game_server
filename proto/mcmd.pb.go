@@ -70,52 +70,13 @@ func (MessageCmd) EnumDescriptor() ([]byte, []int) {
 	return file_mcmd_proto_rawDescGZIP(), []int{0}
 }
 
-type BaseInfo struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-}
-
-func (x *BaseInfo) Reset() {
-	*x = BaseInfo{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_mcmd_proto_msgTypes[0]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *BaseInfo) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*BaseInfo) ProtoMessage() {}
-
-func (x *BaseInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_mcmd_proto_msgTypes[0]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use BaseInfo.ProtoReflect.Descriptor instead.
-func (*BaseInfo) Descriptor() ([]byte, []int) {
-	return file_mcmd_proto_rawDescGZIP(), []int{0}
-}
-
 var File_mcmd_proto protoreflect.FileDescriptor
 
 var file_mcmd_proto_rawDesc = []byte{
 	0x0a, 0x0a, 0x6d, 0x63, 0x6d, 0x64, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x07, 0x6d, 0x65,
-	0x73, 0x73, 0x61, 0x67, 0x65, 0x22, 0x0a, 0x0a, 0x08, 0x42, 0x61, 0x73, 0x65, 0x49, 0x6e, 0x66,
-	0x6f, 0x2a, 0x1f, 0x0a, 0x0a, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x43, 0x6d, 0x64, 0x12,
-	0x11, 0x0a, 0x0d, 0x47, 0x45, 0x54, 0x5f, 0x55, 0x53, 0x45, 0x52, 0x5f, 0x4c, 0x49, 0x53, 0x54,
-	0x10, 0x00, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x73, 0x73, 0x61, 0x67, 0x65, 0x2a, 0x1f, 0x0a, 0x0a, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65,
+	0x43, 0x6d, 0x64, 0x12, 0x11, 0x0a, 0x0d, 0x47, 0x45, 0x54, 0x5f, 0x55, 0x53, 0x45, 0x52, 0x5f,
+	0x4c, 0x49, 0x53, 0x54, 0x10, 0x00, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -131,10 +92,8 @@ func file_mcmd_proto_rawDescGZIP() []byte {
 }
 
 var file_mcmd_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_mcmd_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_mcmd_proto_goTypes = []interface{}{
-	(MessageCmd)(0),  // 0: message.MessageCmd
-	(*BaseInfo)(nil), // 1: message.BaseInfo
+	(MessageCmd)(0), // 0: message.MessageCmd
 }
 var file_mcmd_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
@@ -149,34 +108,19 @@ func file_mcmd_proto_init() {
 	if File_mcmd_proto != nil {
 		return
 	}
-	if !protoimpl.UnsafeEnabled {
-		file_mcmd_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*BaseInfo); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_mcmd_proto_rawDesc,
 			NumEnums:      1,
-			NumMessages:   1,
+			NumMessages:   0,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_mcmd_proto_goTypes,
 		DependencyIndexes: file_mcmd_proto_depIdxs,
 		EnumInfos:         file_mcmd_proto_enumTypes,
-		MessageInfos:      file_mcmd_proto_msgTypes,
 	}.Build()
 	File_mcmd_proto = out.File
 	file_mcmd_proto_rawDesc = nil
