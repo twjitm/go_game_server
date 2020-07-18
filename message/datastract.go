@@ -2,6 +2,8 @@ package message
 
 import (
 	"fmt"
+	"strconv"
+	"strings"
 )
 
 /**
@@ -81,4 +83,13 @@ func PointerTest() {
 	fmt.Println(&dataStruct.b, &dataStruct.a, &dataStruct.name, dataStruct)
 	fmt.Println(pointer.a, &pointer, (*pointer).a)
 
+}
+
+/**
+
+字符串包：strconv，strings
+*/
+func Strings() {
+	strconv.Itoa(1111)
+	strings.Split()
 }

@@ -1,8 +1,18 @@
 package main
 
-import "app/grpcserver/server"
+import (
+	"app/thread"
+	"fmt"
+)
 
+func init() {
+	fmt.Println(" init func")
+
+}
 func main() {
-	server.Start()
+	//thread.GoRun()
+	//thread.GoChannelAndSelect()
+	thread.ChannelLock()
+	//server.Start()
 
 }

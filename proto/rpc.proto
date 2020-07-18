@@ -1,6 +1,6 @@
 syntax = "proto3";
 package message;
-import "mcmd.proto";
+//import "mcmd.proto";
 import "message.proto";
 import "entity.proto";
 
