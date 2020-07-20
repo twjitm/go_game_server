@@ -1,7 +1,7 @@
 package main
 
 import (
-	"app/thread"
+	"app/message"
 	"fmt"
 )
 
@@ -10,9 +10,10 @@ func init() {
 
 }
 func main() {
+	message.FormatJson()
 	//thread.GoRun()
-	//thread.GoChannelAndSelect()
-	thread.ChannelLock()
+	////thread.GoChannelAndSelect()
+	//thread.ChannelLock()
 	//server.Start()
 
 }

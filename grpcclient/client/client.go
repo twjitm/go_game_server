@@ -48,8 +48,6 @@ func Client() {
 		fmt.Println(result.String())
 	}
 
-	select {
 
-	}
 
 }

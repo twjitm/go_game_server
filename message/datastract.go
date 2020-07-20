@@ -1,9 +1,9 @@
 package message
 
 import (
+	json2 "encoding/json"
 	"fmt"
 	"strconv"
-	"strings"
 )
 
 /**
@@ -91,5 +91,24 @@ func PointerTest() {
 */
 func Strings() {
 	strconv.Itoa(1111)
-	strings.Split()
+}
+
+type UserInfo struct {
+	Name    string  `json:"name"`
+	Age     int     `json:"age"`
+	Address string  `json:"address"`
+	Job     JobInfo `json:"job"`
+}
+type JobInfo struct {
+	Title string `json:"title"`
+	Year  int    `json:"year"`
+}
+
+func FormatJson() {
+	var json = `{"name":"twj","age":27,"address":"北京市昌平区","job":{"title":"go开发工程师","year":3}}`
+	by := []byte(json)
+	user := UserInfo{}
+	json2.Unmarshal(by, &user)
+	fmt.Println(user.Name)
+
 }
