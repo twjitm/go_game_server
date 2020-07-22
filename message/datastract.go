@@ -112,3 +112,29 @@ func FormatJson() {
 	fmt.Println(user.Name)
 
 }
+
+//函数类型
+type Address func(string) string
+
+func (a Address) ToString(str string) string {
+
+	return "this is=" + a(str)
+}
+
+func BeiJing(code string) string {
+
+	return "这个地方是:" + code
+}
+
+func ShangHai(code string) string {
+
+	return "这个地方是:" + code
+}
+
+func GetAddress(address Address, name string) string {
+
+	return address(name)
+}
+
+
+

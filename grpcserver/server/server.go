@@ -1,7 +1,7 @@
 package server
 
 import (
-	message "app/proto"
+	"app/proto"
 	"context"
 	"fmt"
 	"google.golang.org/grpc"
@@ -15,35 +15,35 @@ type Server struct {
 	grpcServer *grpc.Server
 }
 
-func (s *Server) GatUserInfo(c context.Context, request *message.GetUserInfoRequest) (*message.GetUserInfoReply, error) {
+func (s *Server) GatUserInfo(c context.Context, request *proto.GetUserInfoRequest) (*proto.GetUserInfoReply, error) {
 	names := request.Name
 	fmt.Print(names)
-	user := message.UserInfo{
+	user := proto.UserInfo{
 		Id:        0,
 		Name:      "",
 		Email:     "",
 		Phone:     "",
 		Addresses: nil,
 	}
-	var list []*message.UserInfo
+	var list []*proto.UserInfo
 	list[0] = &user
-	reply := message.GetUserInfoReply{
+	reply := proto.GetUserInfoReply{
 		UserList: list,
 	}
 	return &reply, nil
 }
 
-func (s *Server) SendMessage(server message.Rpc_SendMessageServer) error {
-	recvChat := message.ChatInfo{}
+func (s *Server) SendMessage(server proto.Rpc_SendMessageServer) error {
+	recvChat := proto.ChatInfo{}
 	recvChat.Type = 1
 	_ = server.RecvMsg(&recvChat)
 
 	fmt.Println(recvChat.Context.Context)
 
-	sendChat := message.ChatInfo{
+	sendChat := proto.ChatInfo{
 		Id:   0,
 		Type: 0,
-		Context: &message.ChatContext{
+		Context: &proto.ChatContext{
 			Type:    0,
 			Context: "hello,im server,go language",
 		},
@@ -67,7 +67,7 @@ func Start() {
 	}
 	// Creates a new gRPC server
 	s := grpc.NewServer()
-	message.RegisterRpcServer(s, &Server{
+	proto.RegisterRpcServer(s, &Server{
 		Address:    "127.0.0",
 		gameServer: &GameServer{},
 		grpcServer: s,
