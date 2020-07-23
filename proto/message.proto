@@ -1,6 +1,6 @@
 syntax = "proto3";
 //option go_package = "~/go/src/go_game_server/proto/message";
-package message;
+package proto;
 import "mcmd.proto";
 import "entity.proto";
 

@@ -1,7 +1,7 @@
 package client
 
 import (
-	message "app/proto"
+	 "app/proto"
 	"context"
 	"fmt"
 	"google.golang.org/grpc"
@@ -17,7 +17,7 @@ func Client() {
 		log.Fatalf("did not connect: %v", err)
 	}
 	defer conn.Close()
-	client := message.NewRpcClient(conn)
+	client := proto.NewRpcClient(conn)
 	//name := []string{"twj", "funplus"}
 	//request := message.GetUserInfoRequest{
 	//	Name: name,
@@ -25,10 +25,10 @@ func Client() {
 	//resp, _ := client.GatUserInfo(context.Background(), &request)
 	//infos := resp.UserList
 	//fmt.Println(infos)
-	chat := message.ChatInfo{
+	chat := proto.ChatInfo{
 		Id:   0,
 		Type: 0,
-		Context: &message.ChatContext{
+		Context: &proto.ChatContext{
 			Type:    0,
 			Context: "hello ,i am client",
 		},

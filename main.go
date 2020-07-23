@@ -1,6 +1,7 @@
 package main
 
 import (
+	"app/conf"
 	"bufio"
 	"fmt"
 	"net/http"
@@ -22,6 +23,8 @@ type Feed struct {
 }
 
 func main() {
+
+	conf.GetRedisConfig()
 
 	//wg := sync.WaitGroup{}
 	//wg.Add(2)
