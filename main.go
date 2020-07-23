@@ -1,9 +1,10 @@
 package main
 
 import (
-	"app/conf"
 	"bufio"
 	"fmt"
+	"go_game_server/conf"
+	"go_game_server/grpcserver/server"
 	"net/http"
 	"os"
 )
@@ -24,11 +25,8 @@ type Feed struct {
 
 func main() {
 
-	conf.GetRedisConfig()
-
-	//wg := sync.WaitGroup{}
-	//wg.Add(2)
-	//go server.Start()
+	  conf.GetRedisConfig()
+	 server.Start()
 	//time.Sleep(1000)
 	////go grpcclient.Client()
 	//wg.Wait()

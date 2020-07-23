@@ -28,7 +28,6 @@ type CommandWriter struct {
 }
 
 func NewCommandWriter(writer io.Writer) *CommandWriter {
-
 	return &CommandWriter{
 		writer: writer,
 	}

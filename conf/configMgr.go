@@ -3,36 +3,47 @@ package conf
 import (
 	"fmt"
 	"github.com/spf13/viper"
+	"path/filepath"
 )
 
 type RedisPoll struct {
-	Host    string
-	TimeOut int64
+	Host    string `json:"host"`
+	TimeOut int64  `json:"timeout"`
+	Shard   string `json:"shard"`
 }
+type Config struct {
+	Pools []RedisPoll `json:"pools"`
+}
+var redisPools []RedisPoll
 
 func init() {
+	fmt.Println("configMgr init")
+}
 
+func GetRedisPool(shard string) (pool *RedisPoll) {
+	for ps := range redisPools {
+		pp := redisPools[ps]
+		if pp.Shard == shard {
+			pool = &pp
+		}
+	}
+	return pool
 }
 
 func GetRedisConfig() *[]RedisPoll {
-	config := viper.New()
 
-	config.SetConfigFile("redis")
-	config.SetConfigType("json")
-	config.AddConfigPath("conf/")
-	config.AddConfigPath("$GOPATH/src/")
-
-	var pools = []RedisPoll{}
-	keys := config.AllKeys()
-
-	if err := config.ReadInConfig(); err != nil {
+	globalViper := viper.New()
+	configPath := filepath.Join("conf", "redis.json")
+	globalViper.SetConfigFile(configPath)
+	var pools Config
+	if err := globalViper.ReadInConfig(); err != nil {
 		panic(err)
 	}
-
-	fmt.Print(keys)
-	err := config.Unmarshal(&pools)
+	err := globalViper.Unmarshal(&pools)
 	if err != nil {
-		fmt.Errorf("redis config error")
+		panic(err)
 	}
-	return &pools
+	fmt.Println(pools)
+	redisPools = pools.Pools
+	return &pools.Pools
 }

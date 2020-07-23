@@ -1,9 +1,9 @@
 package client
 
 import (
-	 "app/proto"
 	"context"
 	"fmt"
+	"go_game_server/proto"
 	"google.golang.org/grpc"
 	"log"
 	"time"

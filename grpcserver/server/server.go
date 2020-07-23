@@ -1,9 +1,10 @@
 package server
 
 import (
-	"app/proto"
 	"context"
 	"fmt"
+	"go_game_server/chat"
+	"go_game_server/proto"
 	"google.golang.org/grpc"
 	"log"
 	"net"
@@ -13,6 +14,7 @@ type Server struct {
 	Address    string
 	gameServer *GameServer
 	grpcServer *grpc.Server
+	chatServer *chat.TcpChatServer
 }
 
 func (s *Server) GatUserInfo(c context.Context, request *proto.GetUserInfoRequest) (*proto.GetUserInfoReply, error) {
@@ -71,6 +73,7 @@ func Start() {
 		Address:    "127.0.0",
 		gameServer: &GameServer{},
 		grpcServer: s,
+		chatServer: chat.StartServer(),
 	})
 	_ = s.Serve(lis)
 }
