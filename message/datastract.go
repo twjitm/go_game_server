@@ -98,6 +98,7 @@ type UserInfo struct {
 	Age     int     `json:"age"`
 	Address string  `json:"address"`
 	Job     JobInfo `json:"job"`
+	JobTitle string `json:"job_title"`
 }
 type JobInfo struct {
 	Title string `json:"title"`
@@ -108,7 +109,7 @@ func FormatJson() {
 	var json = `{"name":"twj","age":27,"address":"北京市昌平区","job":{"title":"go开发工程师","year":3}}`
 	by := []byte(json)
 	user := UserInfo{}
-	json2.Unmarshal(by, &user)
+	_ = json2.Unmarshal(by, &user)
 	fmt.Println(user.Name)
 
 }
