@@ -42,6 +42,13 @@ func MapTest() {
 	fmt.Println("new map=", newMapEntry)
 	fmt.Println("map =", mapEntry)
 
+	var abstractMap = make(map[interface{}]interface{})
+
+	abstractMap["string"] = 1
+	abstractMap[1] = 2
+	abstractMap[newMapEntry] = newMapEntry
+	abstractMap[1] = 2
+
 }
 
 /**
@@ -91,18 +98,24 @@ func PointerTest() {
 */
 func Strings() {
 	strconv.Itoa(1111)
+	bo, _ := strconv.ParseBool("true")
+	fmt.Println(bo)
 }
 
 type UserInfo struct {
-	Name    string  `json:"name"`
-	Age     int     `json:"age"`
-	Address string  `json:"address"`
-	Job     JobInfo `json:"job"`
-	JobTitle string `json:"job_title"`
+	Name     string  `json:"name"`
+	Age      int     `json:"age"`
+	Address  string  `json:"address"`
+	Job      JobInfo `json:"job"`
+	JobTitle string  `json:"job_title"`
 }
 type JobInfo struct {
 	Title string `json:"title"`
 	Year  int    `json:"year"`
+}
+
+type Status struct {
+	name string `map`
 }
 
 func FormatJson() {
@@ -136,6 +149,3 @@ func GetAddress(address Address, name string) string {
 
 	return address(name)
 }
-
-
-
