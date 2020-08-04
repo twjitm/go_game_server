@@ -14,10 +14,12 @@ type RedisPoll struct {
 type Config struct {
 	Pools []RedisPoll `json:"pools"`
 }
+
 var redisPools []RedisPoll
 
 func init() {
 	fmt.Println("configMgr init")
+	GetRedisConfig()
 }
 
 func GetRedisPool(shard string) (pool *RedisPoll) {

@@ -24,7 +24,7 @@ type Feed struct {
 
 func main() {
 
-	message.Test()
+	message.ExeCommand()
 	//conf.GetRedisConfig()
 	//server.Init()
 	//web.Init()

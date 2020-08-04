@@ -14,27 +14,31 @@ type PrimaryKey struct {
 type ActiveDb struct {
 }
 
-type IBaseDao interface {
-	Get()
-	FindOne()
-	GetOrCreate()
-	FindAll()
-}
-type BaseDao struct {
-	dao *IBaseDao
+type IBaseModel interface {
+	Get(primary int64) ActiveDb
+	FindOne(sql string) ActiveDb
+	GetOrCreate([]interface{})
+	FindAll(sql string)
 }
 
-func (b *BaseDao) Get() {
-
+type UserInfoModel struct {
+	ActiveDb
+	Uid      int64
+	Name     string
+	PostCode string
+	Address  string
+	Phone    string
+	Age      int
 }
 
-func (b *BaseDao) FindOne() {
-}
-
-func (b *BaseDao) GetOrCreate() {
-}
-
-func (b *BaseDao) FindAll() {
+func (userInfo *UserInfoModel) Get(uid int64) *UserInfoModel {
+	db := GetDriver()
+	rows, _ := db.Query("select * from user_info where uid=?", uid)
+	user := UserInfoModel{}
+	if rows.Next() {
+		rows.Scan(&user.Uid, &user.Name, &user.PostCode, &user.Address, &user.Phone, &user.Age)
+	}
+	return &user
 }
 
 func GetDriver() *sql.DB {
@@ -89,7 +93,7 @@ func GetApisById(id int32) Apis {
 	return Apis{}
 }
 
-func GetApisListByIds(result *[]Apis, ids [] int32) {
+func GetApisListByIds(result *[]Apis, ids []int32) {
 	db := GetDriver()
 	rows, _ := db.Query("select * from apis where id in ( ? )", ids)
 	for rows.Next() {
@@ -124,7 +128,7 @@ type User struct {
 
 func main() {
 	//Init()
-	//apis := GetApisById(1)
+	apis := GetApisById(1)
 	_ = orm.RegisterDataBase("default", "mysql", "root:root@/127.0.0.1:3306/caiop?charset=utf8", 30)
 
 	//fmt.Println(apis)
