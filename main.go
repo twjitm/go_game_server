@@ -3,7 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"go_game_server/web"
+	"go_game_server/message"
 	"net/http"
 	"os"
 )
@@ -24,9 +24,10 @@ type Feed struct {
 
 func main() {
 
+	message.Test()
 	//conf.GetRedisConfig()
 	//server.Init()
-	web.Init()
+	//web.Init()
 	//server.Start()
 	//time.Sleep(1000)
 	////go grpcclient.Client()
