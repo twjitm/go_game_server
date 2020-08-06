@@ -149,3 +149,19 @@ func GetAddress(address Address, name string) string {
 
 	return address(name)
 }
+
+//断言
+func contrivedInterfaceToUserInfo() interface{} {
+	return UserInfo{
+		Name:     "twj",
+		Age:      1,
+		Address:  "bj",
+		Job:      JobInfo{},
+		JobTitle: "go developer",
+	}
+}
+
+func TestContrived() {
+	result := contrivedInterfaceToUserInfo().(UserInfo)
+	fmt.Println(result.Name)
+}

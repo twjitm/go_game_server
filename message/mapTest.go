@@ -27,13 +27,12 @@ func GetUserList() User {
 		fmt.Println(k)
 		fmt.Println(v)
 	}
+	re, ok := maps[1]
+	if ok {
+		fmt.Println(re)
+	}
 
 	return maps[1]
 }
 
-
 //线性安全操作map
-
-
-
-

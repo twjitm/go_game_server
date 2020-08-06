@@ -23,22 +23,37 @@ type IBaseModel interface {
 
 type UserInfoModel struct {
 	ActiveDb
-	Uid      int64
-	Name     string
-	PostCode string
-	Address  string
-	Phone    string
-	Age      int
+	Uid      int64  `json:"uid"`
+	Name     string ``
+	PostCode string ``
+	Address  string ``
+	Phone    string ``
+	Age      int    ``
 }
 
 func (userInfo *UserInfoModel) Get(uid int64) *UserInfoModel {
 	db := GetDriver()
-	rows, _ := db.Query("select * from user_info where uid=?", uid)
-	user := UserInfoModel{}
-	if rows.Next() {
-		rows.Scan(&user.Uid, &user.Name, &user.PostCode, &user.Address, &user.Phone, &user.Age)
+	rows, ero := db.Query("select * from user_info where uid=?", uid)
+	if ero != nil {
+		return nil
 	}
-	return &user
+	defer rows.Close()
+
+	var userList []UserInfoModel
+	if rows.Next() {
+		user := UserInfoModel{}
+		_ = rows.Scan(&user.Uid, &user.Name, &user.PostCode, &user.Address, &user.Phone, &user.Age)
+		userList = append(userList, user)
+	}
+	if userList != nil {
+		user := userList[0]
+		return &user
+	}
+	return nil
+}
+
+func GetOne(pk []int64, toData func(rows *sql.Rows)) {
+
 }
 
 func GetDriver() *sql.DB {

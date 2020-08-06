@@ -15,6 +15,4 @@ func ExeCommand() {
 	}
 	s := string(result)
 	fmt.Println(s)
-	_ = exe.Run()
-
 }

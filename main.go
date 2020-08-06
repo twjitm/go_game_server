@@ -24,7 +24,8 @@ type Feed struct {
 
 func main() {
 
-	message.ExeCommand()
+	//message.TestFunc()
+	//message.ExeCommand()
 	//conf.GetRedisConfig()
 	//server.Init()
 	//web.Init()
@@ -87,6 +88,9 @@ func main() {
 	//message.Builder(&udp)
 	//
 	//message.GetBody(&udp)
+
+	//web.UnixNet()
+	message.TestContrived()
 
 }
 
