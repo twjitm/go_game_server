@@ -122,7 +122,7 @@ func searchTeam(search string) {
 func input() {
 	var port = 0
 	println("请输入端口号")
-	fmt.Scan(&port)
+	_, _ = fmt.Scan(&port)
 	println("输入的参数为", port)
 
 	println("请输入一个字符串")
@@ -174,5 +174,5 @@ func request() {
 
  */
 func dispatch(response http.ResponseWriter, request *http.Request) {
-	fmt.Fprintf(response, "这是一个开始")
+	_, _ = fmt.Fprintf(response, "这是一个开始")
 }
