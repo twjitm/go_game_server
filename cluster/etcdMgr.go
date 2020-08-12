@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/coreos/etcd/clientv3"
 	"github.com/coreos/etcd/mvcc/mvccpb"
+	"sync"
 	"time"
 )
 
@@ -14,6 +15,7 @@ import (
 type clientMgr struct {
 	client     *clientv3.Client
 	serverList map[string]string
+	lock       *sync.Mutex
 }
 
 var EtcdClient clientMgr
@@ -86,11 +88,11 @@ func (client *clientMgr) PutMember(values []interface{}) {
 	_, _ = client.client.MemberAdd(context.Background(), fileds)
 }
 
-func (client *clientMgr) Watcher(key string,do func(event *clientv3.Event)) {
+func (client *clientMgr) Watcher(key string, do func(event *clientv3.Event)) {
 	go func() {
 		watch := EtcdClient.client.Watch(context.Background(), key)
 		for result := range watch {
-
+			EtcdClient.lock.Lock()
 			fmt.Println("watch key is change")
 			events := result.Events
 			for i := 0; i < len(events); i++ {
@@ -100,11 +102,12 @@ func (client *clientMgr) Watcher(key string,do func(event *clientv3.Event)) {
 				do(event)
 				switch event.Type {
 				case mvccpb.PUT:
-					//新增节点 todo
+					EtcdClient.serverList[string(event.Kv.Key)] = string(event.Kv.Value)
 				case mvccpb.DELETE:
-					//删除节点 todo
+					delete(EtcdClient.serverList, string(event.Kv.Key))
 				}
 			}
+			EtcdClient.lock.Lock()
 		}
 
 		//select {
