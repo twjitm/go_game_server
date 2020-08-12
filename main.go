@@ -3,7 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"go_game_server/message"
+	"go_game_server/cluster"
 	"net/http"
 	"os"
 )
@@ -90,7 +90,10 @@ func main() {
 	//message.GetBody(&udp)
 
 	//web.UnixNet()
-	message.TestContrived()
+	cluster.EtcdClient.Get("localhost", func(data string) {
+		fmt.Println(data)
+	})
+	//message.TestContrived()
 
 }
 
