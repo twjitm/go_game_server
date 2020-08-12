@@ -3,9 +3,11 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"github.com/coreos/etcd/clientv3"
 	"go_game_server/cluster"
 	"net/http"
 	"os"
+	"time"
 )
 
 const PI = float64(3.1415926)
@@ -90,10 +92,17 @@ func main() {
 	//message.GetBody(&udp)
 
 	//web.UnixNet()
-	cluster.EtcdClient.Get("localhost", func(data string) {
+	cluster.EtcdClient.Get("twjitm/*", func(data string) {
 		fmt.Println(data)
 	})
+
+	cluster.EtcdClient.Watcher("twjitm/*", func(event *clientv3.Event) {
+		//
+	})
 	//message.TestContrived()
+	for  {
+		time.Sleep(time.Second*1)
+	}
 
 }
 

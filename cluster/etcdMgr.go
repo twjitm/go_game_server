@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/coreos/etcd/clientv3"
-	_ "log"
+	"github.com/coreos/etcd/mvcc/mvccpb"
 	"time"
 )
 
@@ -83,7 +83,44 @@ func (client *clientMgr) PutMember(values []interface{}) {
 		}
 		fileds[i] = string(data)
 	}
-	client.client.MemberAdd(context.Background(),fileds)
+	_, _ = client.client.MemberAdd(context.Background(), fileds)
+}
 
+func (client *clientMgr) Watcher(key string,do func(event *clientv3.Event)) {
+	go func() {
+		watch := EtcdClient.client.Watch(context.Background(), key)
+		for result := range watch {
 
+			fmt.Println("watch key is change")
+			events := result.Events
+			for i := 0; i < len(events); i++ {
+				event := events[i]
+				fmt.Println(event.Type.String())
+				//事件类型
+				do(event)
+				switch event.Type {
+				case mvccpb.PUT:
+					//新增节点 todo
+				case mvccpb.DELETE:
+					//删除节点 todo
+				}
+			}
+		}
+
+		//select {
+		//case watchResponse := <-watch:
+		//	fmt.Println("watch key is change")
+		//	events := watchResponse.Events
+		//	for i := 0; i < len(events); i++ {
+		//		event := events[i]
+		//		//事件类型
+		//		switch event.Type {
+		//		case mvccpb.PUT:
+		//			//新增节点 todo
+		//		case mvccpb.DELETE:
+		//			//删除节点 todo
+		//		}
+		//	}
+		//}
+	}()
 }
