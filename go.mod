@@ -11,6 +11,7 @@ require (
 	github.com/go-sql-driver/mysql v1.4.1
 	github.com/golang/protobuf v1.4.2
 	github.com/json-iterator/go v1.1.9 // indirect
+	github.com/mailru/easyjson v0.7.6
 	github.com/mattn/go-isatty v0.0.7 // indirect
 	github.com/onsi/ginkgo v1.14.0 // indirect
 	github.com/spf13/viper v1.7.0
