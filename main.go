@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"go_game_server/arithmetic"
+	"go_game_server/message"
 	"net/http"
 	"os"
 )
@@ -107,8 +108,10 @@ func main() {
 	// data:=[]int{0,0,1,1,2,3,4}
 	//
 	//  arithmetic.DuplicatesArray(data)
-	dayN()
-
+	//dayN()
+	//images.Image()
+   //message.ContextTest()
+	message.HandlerTest()
 }
 
 func modify(array [6]int) {
