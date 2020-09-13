@@ -26,7 +26,7 @@ require (
 	gopkg.in/go-playground/validator.v8 v8.18.2 // indirect
 )
 
-replace (
-	github.com/coreos/go-systemd => github.com/coreos/go-systemd/v22 v22.0.0
-	google.golang.org/grpc => google.golang.org/grpc v1.27.0
-)
+//replace (
+//	github.com/coreos/go-systemd => github.com/coreos/go-systemd/v22 v22.0.0
+//	google.golang.org/grpc => google.golang.org/grpc v1.27.0
+//)
