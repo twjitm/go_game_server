@@ -27,9 +27,9 @@ func GetNamespace(collection string) *MgoNames {
 		collection: collection,
 	}
 	if len(conf.ServerConf.MongoDBConf.Suffix) > 0 {
-		mn.database = "jira_" + conf.ServerConf.MongoDBConf.Suffix
+		mn.database = "gs_server_" + conf.ServerConf.MongoDBConf.Suffix
 	} else {
-		mn.database = "jira"
+		mn.database = "gs_server_user"
 	}
 	return mn
 }
@@ -100,7 +100,7 @@ func FindAll(mgo *MgoNames, filter interface{}, toData func(ctx context.Context,
 	return err
 }
 
-func FindOne(mgo *MgoNames, filter interface{}, toData func(ctx context.Context, result *mongo.SingleResult)) error {
+func FindOne(mgo *MgoNames, filter interface{}, toData func(ctx context.Context, result *mongo.SingleResult) (successful bool, err error)) error {
 	if !conf.ServerConf.MongoDBConf.InUse {
 		return nil
 	}
@@ -112,7 +112,8 @@ func FindOne(mgo *MgoNames, filter interface{}, toData func(ctx context.Context,
 	defer cancel()
 	singleResult := collection.FindOne(ctx, filter)
 	if singleResult != nil {
-		toData(ctx, singleResult)
+		_, err := toData(ctx, singleResult)
+		return err
 	}
 	return nil
 }

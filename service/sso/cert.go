@@ -1,8 +1,11 @@
 package sso
 
 import (
+	"context"
+	"fmt"
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo"
 	"go_game_server/database"
-	"go_game_server/service/base"
 )
 
 /**应用认证发布 任何*/
@@ -14,18 +17,56 @@ type Cert struct {
 }
 
 type CertServiceImpl struct {
-	base.MongodbService
 }
 
 var GertService CertServiceImpl
 
-func (c CertServiceImpl) GetAll() []interface{} {
-
-	database.GetApisListByIds()
-	return nil
+func (c CertServiceImpl) GetAll() *[]Cert {
+	var certs *[]Cert
+	database.FindAll(database.GetNamespace("cert"), bson.M{
+		"status": 1,
+	}, func(ctx context.Context, cur *mongo.Cursor) bool {
+		err := cur.Decode(certs)
+		return err == nil
+	})
+	return certs
 }
 
-func (c CertServiceImpl) GetById(id interface{}) interface{} {
-	return nil
+func (c CertServiceImpl) GetById(appId string) *Cert {
+	var cert *Cert
+	database.FindOne(database.GetNamespace("cert"), bson.M{"app_id": appId},
+		func(ctx context.Context, result *mongo.SingleResult) (bool, error) {
+			err := result.Decode(cert)
+			if err != nil {
+				fmt.Println("get cert error")
+				return false, err
+			}
+			return true, nil
+		})
+	return cert
 }
 
+func (c CertServiceImpl) Add(cert *Cert) error {
+	if cert.AppId == "" || cert.Token == "" {
+		return fmt.Errorf("data error")
+	}
+	if c.GetById(cert.AppId) != nil {
+		return fmt.Errorf("cert exists")
+	}
+	err := database.InsertOne(database.GetNamespace("cert"), cert)
+	return err
+}
+
+func (c CertServiceImpl) Delete(appId string) error {
+	return database.DeleteMany(database.GetNamespace("cert"), bson.M{
+		"app_id": appId,
+	})
+}
+
+func (c CertServiceImpl) Valid(appId, token string) bool {
+	cert := c.GetById(appId)
+	if cert == nil {
+		return false
+	}
+	return cert.Token == token
+}
