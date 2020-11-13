@@ -1,0 +1,9 @@
+{
+  "Suffix": "zday",
+  "MaxPoolSize": 20,
+  "URI": "mongodb://127.0.0.1:27017",
+  "InUse": true,
+  "Sharding": false,
+  "MongosURI": "mongodb://127.0.0.1:27011/?retryWrites=false",
+  "TimeOut": 5
+}

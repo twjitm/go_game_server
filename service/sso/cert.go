@@ -19,7 +19,7 @@ type Cert struct {
 type CertServiceImpl struct {
 }
 
-var GertService CertServiceImpl
+var CertService CertServiceImpl
 
 func (c CertServiceImpl) GetAll() *[]Cert {
 	var certs *[]Cert
@@ -70,3 +70,4 @@ func (c CertServiceImpl) Valid(appId, token string) bool {
 	}
 	return cert.Token == token
 }
+

@@ -27,7 +27,7 @@ func init() {
 	ServerConf = GlobalServerConf{
 		MongoDBConf: nil,
 	}
-	data, err := ioutil.ReadFile("config/mongodb.json")
+	data, err := ioutil.ReadFile("conf/mongodb.json")
 	mongo := MongodbConf{}
 	err = json2.Unmarshal(data, &mongo)
 	if err != nil {
