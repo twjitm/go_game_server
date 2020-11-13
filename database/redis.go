@@ -8,7 +8,7 @@ import (
 
 var redisClient map[string]*redis.Client
 
-func GetClient(shard string) *redis.Client {
+func Redis(shard string) *redis.Client {
 	client := redisClient[shard]
 	config := conf.GetRedisPool(shard)
 	if client == nil {

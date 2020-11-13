@@ -1,1 +1,1 @@
-{  "pools": [    {      "shard": "user",      "host": "127.0.0.1:6379",      "timeout": 5000    },    {      "shard": "user",      "host": "127.0.0.1:6379",      "timeout": 5000    }  ]}
+{  "pools": [    {      "shard": "user",      "host": "127.0.0.1:6379",      "timeout": 5000    },    {      "shard": "sso",      "host": "127.0.0.1:6379",      "timeout": 5000    }  ]}
