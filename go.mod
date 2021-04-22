@@ -12,6 +12,7 @@ require (
 	github.com/go-sql-driver/mysql v1.4.1
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0 // indirect
 	github.com/golang/protobuf v1.4.2
+	github.com/gorilla/websocket v1.4.2 // indirect
 	github.com/json-iterator/go v1.1.9 // indirect
 	github.com/mailru/easyjson v0.7.6
 	github.com/mattn/go-isatty v0.0.7 // indirect

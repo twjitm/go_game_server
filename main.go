@@ -4,7 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"go_game_server/arithmetic"
-	"go_game_server/message"
+	"go_game_server/gorpc"
 	"net/http"
 	"os"
 )
@@ -25,6 +25,7 @@ type Feed struct {
 
 func main() {
 
+	gorpc.StartRpc()
 	//message.TestFunc()
 	//message.ExeCommand()
 	//conf.GetRedisConfig()
@@ -111,7 +112,10 @@ func main() {
 	//dayN()
 	//images.Image()
    //message.ContextTest()
-	message.HandlerTest()
+	//message.HandlerTest()
+//	message.Active()
+
+
 }
 
 func modify(array [6]int) {
@@ -197,8 +201,7 @@ func dispatch(response http.ResponseWriter, request *http.Request) {
 	_, _ = fmt.Fprintf(response, "这是一个开始")
 }
 
-
-func dayN(){
-	searchdata:=[]int{1,4,6,7,8,9,11,13,14,16,18,19}
-	arithmetic.HalfSearch(searchdata,18)
+func dayN() {
+	searchdata := []int{1, 4, 6, 7, 8, 9, 11, 13, 14, 16, 18, 19}
+	arithmetic.HalfSearch(searchdata, 18)
 }
