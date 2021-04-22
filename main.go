@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"go_game_server/arithmetic"
 	"go_game_server/gorpc"
+	"go_game_server/message"
+	"go_game_server/web"
 	"net/http"
 	"os"
 )
@@ -96,6 +98,7 @@ func main() {
 	//	fmt.Println(data)
 	//})
 	//
+	web.Init()
 
 	//-----------
 	//cluster.EtcdClient.Watcher("twjitm/*", func(event *clientv3.Event) {
@@ -110,6 +113,8 @@ func main() {
 	//
 	//  arithmetic.DuplicatesArray(data)
 	//dayN()
+	message.TestInterface()
+
 	//images.Image()
    //message.ContextTest()
 	//message.HandlerTest()

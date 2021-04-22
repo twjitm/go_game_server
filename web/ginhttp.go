@@ -3,7 +3,6 @@ package web
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"net/http"
 )
 
 type ResultPo struct {
@@ -28,39 +27,27 @@ var global *gin.Engine
 
 func start() {
 	fmt.Println("<<<---------start http server------------>>>")
-
 	r := gin.Default()
 	v1 := r.Group("v1")
 	{
 		v1.GET("login", login)
 	}
-	static := r.Group("/")
-	{
-		static.GET("login.html", ginHandler)
-
-	}
-	//r.StaticFS("/web/", http.Dir("web/static"))
-	r.LoadHTMLGlob("web/static/*")
 	global = r
 	_ = r.Run("127.0.0.1:7077") // listen and serve on 0.0.0.0:7077
-}
-
-func ginHandler(context *gin.Context) {
-
-	context.HTML(http.StatusOK, "login.html", nil)
 }
 
 func login(context *gin.Context) {
 	result := NewResultPo()
 
 	name := context.DefaultQuery("name", "")
-
 	result.Message = "successful"
 	result.Code = 200
 	result.pushData("username", name)
 	fmt.Println(name)
+	context.Request.Header.Set("session","1111")
 	context.JSON(200, result)
 }
+
 
 
 func stop() {
