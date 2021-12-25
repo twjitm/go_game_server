@@ -6,6 +6,7 @@ import (
 	"go_game_server/proto"
 	"google.golang.org/grpc"
 	"log"
+	"sync"
 	"time"
 )
 
@@ -18,13 +19,6 @@ func Client() {
 	}
 	defer conn.Close()
 	client := proto.NewRpcClient(conn)
-	//name := []string{"twj", "funplus"}
-	//request := message.GetUserInfoRequest{
-	//	Name: name,
-	//}
-	//resp, _ := client.GatUserInfo(context.Background(), &request)
-	//infos := resp.UserList
-	//fmt.Println(infos)
 	chat := proto.ChatInfo{
 		Id:   0,
 		Type: 0,
@@ -46,8 +40,10 @@ func Client() {
 			return
 		}
 		fmt.Println(result.String())
+		lock := &sync.Mutex{}
+		lock.Lock()
+		defer lock.Unlock()
+
 	}
-
-
 
 }
